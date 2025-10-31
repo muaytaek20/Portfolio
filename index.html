@@ -2,186 +2,443 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Bipran Rimal | Cybersecurity Engineer</title>
+  <title>Bipran Rimal — Cybersecurity Engineer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="style.css">
-  <!-- Google font (optional) -->
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    /* ----------  ROOT & RESET  ---------- */
+    :root{
+      --bg:#0d0d0d;
+      --bg-alt:#111;
+      --primary:#00ff99;
+      --secondary:#ffb000;
+      --text:#e0e0e0;
+      --muted:#999;
+      --line:rgba(0,255,153,.25);
+      --font:"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+      --mono:ui-monospace,"Cascadia Code","Source Code Pro",monospace;
+      --max:1000px;
+    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{
+      font-family:var(--font);
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.6;
+    }
+    img{max-width:100%;}
+    a{color:var(--primary);text-decoration:none;}
+    a:hover{color:var(--secondary);}
+    ul{list-style:none;}
+    /* ----------  LAYOUT  ---------- */
+    .container{width:90%;max-width:var(--max);margin:auto;}
+    .section{padding:70px 0;}
+    .section.alt{background:var(--bg-alt);}
+    h2{
+      font-size:1.75rem;
+      margin-bottom:1.5rem;
+      text-transform:uppercase;
+      letter-spacing:2px;
+      position:relative;
+      display:inline-block;
+    }
+    h2::after{
+      content:"";
+      position:absolute;
+      left:0;bottom:-6px;
+      height:3px;
+      width:40px;
+      background:var(--primary);
+    }
+    h3{font-size:1.1rem;margin-bottom:.25rem;color:var(--primary);}
+    p{margin-bottom:1rem;}
+    .muted{color:var(--muted);}
+    .mono{font-family:var(--mono);}
+    /* ----------  NAV  ---------- */
+    nav{
+      position:sticky;
+      top:0;
+      z-index:100;
+      background:#000c;
+      backdrop-filter:blur(6px);
+      border-bottom:1px solid var(--line);
+    }
+    nav ul{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:1.5rem;
+      padding:1rem 0;
+    }
+    nav a{
+      color:var(--text);
+      font-weight:600;
+      font-size:.85rem;
+      letter-spacing:1px;
+      transition:.2s;
+    }
+    nav a:hover{color:var(--primary);}
+    /* ----------  HERO  ---------- */
+    #hero{
+      height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      position:relative;
+      overflow:hidden;
+    }
+    #matrix{
+      position:absolute;
+      inset:0;
+      width:100%;height:100%;
+      z-index:0;
+    }
+    .hero-content{
+      position:relative;
+      z-index:2;
+    }
+    .hero-content h1{
+      font-size:clamp(2.5rem,8vw,5rem);
+      font-weight:700;
+      letter-spacing:3px;
+      text-transform:uppercase;
+      margin-bottom:.5rem;
+    }
+    .hero-content p{font-size:1.1rem;color:var(--muted);}
+    .contact-bar{
+      margin-top:2rem;
+      display:flex;
+      gap:1.2rem;
+      justify-content:center;
+      flex-wrap:wrap;
+      font-size:.9rem;
+    }
+    .contact-bar a{
+      display:flex;
+      align-items:center;
+      gap:.4rem;
+      padding:6px 12px;
+      border:1px solid var(--line);
+      border-radius:4px;
+      transition:.2s;
+    }
+    .contact-bar a:hover{background:var(--primary);color:#000;}
+    /* ----------  TIMELINE  ---------- */
+    .timeline{
+      border-left:2px solid var(--line);
+      padding-left:2rem;
+      margin-left:1rem;
+    }
+    .timeline-item{
+      position:relative;
+      margin-bottom:2.5rem;
+    }
+    .timeline-item::before{
+      content:"";
+      position:absolute;
+      left:-2.6rem;top:.4rem;
+      width:12px;height:12px;
+      background:var(--primary);
+      border-radius:50%;
+    }
+    .timeline-date{
+      font-family:var(--mono);
+      font-size:.8rem;
+      color:var(--secondary);
+      margin-bottom:.25rem;
+    }
+    .timeline-title{font-weight:600;margin-bottom:.25rem;}
+    .timeline-subtitle{color:var(--muted);margin-bottom:.5rem;}
+    .timeline ul{margin-left:1.2rem;list-style:disc;color:var(--muted);}
+    .timeline li{margin-bottom:.4rem;}
+    /* ----------  PROJECT CARD  ---------- */
+    .grid{
+      display:grid;
+      gap:2rem;
+      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    }
+    .card{
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--line);
+      border-radius:6px;
+      padding:2rem;
+      transition:transform .3s,box-shadow .3s;
+    }
+    .card:hover{
+      transform:translateY(-5px);
+      box-shadow:0 0 20px var(--line);
+    }
+    .card h3{margin-bottom:.75rem;}
+    .card p{color:var(--muted);font-size:.95rem;}
+    /* ----------  SKILL TABLE  ---------- */
+    .skill-table{
+      display:grid;
+      gap:2rem;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    }
+    .skill-table h4{
+      font-size:1rem;
+      margin-bottom:.75rem;
+      color:var(--secondary);
+      text-transform:uppercase;
+      letter-spacing:1px;
+    }
+    .skill-table ul li{
+      padding:4px 0;
+      font-size:.9rem;
+      color:var(--muted);
+    }
+    /* ----------  FOOTER  ---------- */
+    footer{
+      padding:50px 0 30px;
+      text-align:center;
+      background:#000;
+    }
+    .copy{font-size:.8rem;color:var(--muted);}
+    /* ----------  PRINT  ---------- */
+    @media print{
+      body{background:#fff;color:#000;}
+      nav,#matrix{display:none;}
+      .section{padding:30px 0;}
+      h2{color:#000;border-bottom:2px solid #000;padding-bottom:4px;}
+    }
+  </style>
 </head>
 
 <body>
-  <!-- 1. Hero / Landing -->
+  <!-- ----------  NAV  ---------- -->
+  <nav>
+    <ul>
+      <li><a href="#hero">Top</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills & Certs</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ----------  HERO  ---------- -->
   <section id="hero">
     <canvas id="matrix"></canvas>
     <div class="hero-content">
-      <h1 class="glitch" data-text="Bipran Rimal">Bipran Rimal</h1>
-      <p>cybersecurity engineer · incident responder · builder</p>
-      <a href="#about" class="cta">Enter the system</a>
-    </div>
-  </section>
-
-  <!-- 2. About -->
-  <section id="about" class="section">
-    <div class="container">
-      <h2>About</h2>
-      <p>
-        I’m a Cybersecurity major at the University of Cincinnati (4.0 GPA) with
-        hands-on experience in Active Directory, network hardening, and incident response.
-        Currently pursuing the <span class="highlight">CompTIA CySA+</span>.
-      </p>
-      <div class="badges">
-        <span class="badge">Active Directory</span>
-        <span class="badge">Wireshark</span>
-        <span class="badge">PowerShell</span>
-        <span class="badge">Python</span>
-        <span class="badge">Incident Response</span>
+      <h1>Bipran Rimal</h1>
+      <p class="mono">Cybersecurity Engineer · Incident Responder · Builder</p>
+      <div class="contact-bar">
+        <a href="mailto:bipran.workspace@hotmail.com">
+          <svg width="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          Email
+        </a>
+        <a href="tel:+1-513-400-0661">
+          <svg width="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.12.35.03.75-.25 1.02l-2.2 2.2z"/></svg>
+          (513)-400-0661
+        </a>
+        <a href="https://linkedin.com/in/bipranrimal" target="_blank">
+          <svg width="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://github.com/bipran" target="_blank">
+          <svg width="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          GitHub
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- 3. Experience -->
-  <section id="exp" class="section alt">
+  <!-- ----------  EDUCATION  ---------- -->
+  <section id="education" class="section">
     <div class="container">
-      <h2>Experience</h2>
-
-      <article class="job">
-        <div class="job-date">Aug – Dec 2025</div>
-        <div class="job-body">
-          <h3>IT Intern – Junior Administrator</h3>
-          <p class="company">Fecon LLC</p>
+      <h2>Education</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-date mono">Aug 2025 – May 2029</div>
+          <div class="timeline-title">University of Cincinnati</div>
+          <div class="timeline-subtitle muted">Bachelor of Science, Cybersecurity • GPA: 4.0</div>
           <ul>
-            <li>Deployed domain computers, configured AD & GPOs, patched switches & servers.</li>
-            <li>Resolved 100 % of tickets in ≤ 34 min on average.</li>
+            <li>Networking and Security</li>
+            <li>Database Management</li>
+            <li>System Administration</li>
+            <li>Web Development</li>
+            <li>Interactive Digital Media and Design Technology</li>
+            <li>Core Principles of Information Technology</li>
+            <li>Network Infrastructure Management</li>
+            <li>Computing Programming</li>
           </ul>
         </div>
-      </article>
-
-      <article class="job">
-        <div class="job-date">2025 – Present</div>
-        <div class="job-body">
-          <h3>Residential Tech Support Assistant</h3>
-          <p class="company">University of Cincinnati Housing</p>
-          <ul>
-            <li>Coordinated 25+ RAs; maintained 100 % shift coverage for 950 residents.</li>
-            <li>Achieved 95 % satisfaction rate via front-line support.</li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="job">
-        <div class="job-date">Dec 2023 – Aug 2024</div>
-        <div class="job-body">
-          <h3>IT Infrastructure & Systems Admin Assistant</h3>
-          <p class="company">The Hotel Milestone</p>
-          <ul>
-            <li>Reduced endpoint risk by 85 % through patching, training & hardening.</li>
-            <li>Performed traffic analysis with Wireshark & Nmap.</li>
-          </ul>
-        </div>
-      </article>
+      </div>
     </div>
   </section>
 
-  <!-- 4. Projects -->
+  <!-- ----------  EXPERIENCE  ---------- -->
+  <section id="experience" class="section alt">
+    <div class="container">
+      <h2>Experience</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-date mono">Aug 2025 – Dec 2025 | Kathmandu, Nepal</div>
+          <div class="timeline-title">IT Intern – Junior Administrator (Systems, ERP, Networking & Security)</div>
+          <div class="timeline-subtitle muted">Fecon LLC</div>
+          <ul>
+            <li>Assisted in deploying domain computers, configuring AD user accounts, and implementing GPOs, while maintaining patch panels, switches, and servers, and assisting in the setup of Barracuda firewall sensors to improve network security and monitoring.</li>
+            <li>Resolved 100% of assigned IT support tickets within an average of 34 minutes, ensuring minimal downtime and consistent user satisfaction.</li>
+          </ul>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date mono">Jan 2025 – Present | Cincinnati, Ohio</div>
+          <div class="timeline-title">Neighborhood Frontline Residential Support Assistant – Technology & Operations</div>
+          <div class="timeline-subtitle muted">University of Cincinnati Housing</div>
+          <ul>
+            <li>Managed scheduling, data tracking, and operational workflows for a team of 25+ residential assistants, using Excel and digital systems to ensure 100% shift coverage accuracy and timely completion of over 150+ weekly staff and resident requests.</li>
+            <li>Delivered frontline technical and operational support to a community of 950+ residents, resolving issues and coordinating between departments to achieve a 95%+ satisfaction rate and maintain seamless daily housing operations.</li>
+          </ul>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date mono">Dec 2023 – Aug 2024 | Kathmandu, Nepal</div>
+          <div class="timeline-title">IT Infrastructure & Systems Administrator Assistant</div>
+          <div class="timeline-subtitle muted">The Hotel Milestone</div>
+          <ul>
+            <li>Reduced endpoint risk by 85% by identifying vulnerabilities, patching systems, updating operating systems, phishing awareness training and removing misconfigured services across multiple devices, significantly strengthening overall system security.</li>
+            <li>Monitored network traffic using Wireshark and Nmap, identifying anomalies and improving overall network performance.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ----------  PROJECTS  ---------- -->
   <section id="projects" class="section">
     <div class="container">
       <h2>Projects</h2>
       <div class="grid">
         <div class="card">
-          <h3>Virtual Enterprise Infrastructure</h3>
-          <p>Built VMware lab (AD, DNS, DHCP, File) + VPN; wrote 20-page ops guide.</p>
+          <h3>Virtual Enterprise Infrastructure & IT Operations Guide</h3>
+          <p class="mono muted">Oct 2025 – Nov 2025 | Cincinnati, Ohio</p>
+          <ul>
+            <li>Built a virtualized enterprise network in VMware with 4 servers (AD, DHCP, DNS, File Server) and 1 client system joined via VPN under a custom domain, simulating real-world organizational IT infrastructure on a small scale.</li>
+            <li>Authored a 20-page technical guide detailing the setup of patch panels, switches, and firewalls, improving practical understanding of enterprise IT operations by over 90%.</li>
+          </ul>
         </div>
+
         <div class="card">
-          <h3>Certification Workflow Automation</h3>
-          <p>Power-Automate-driven PDF generator; cut manual effort 80 %.</p>
+          <h3>Enterprise Certification Workflow Automation</h3>
+          <p class="mono muted">Oct 2025 – Nov 2025 | Cincinnati, Ohio | Fecon LLC</p>
+          <ul>
+            <li>Built an automated certification management system using Microsoft Power Automate, Forms, and Excel to streamline how safety certifications are tracked and recorded across the organization.</li>
+            <li>Integrated dynamic data flow from Microsoft Forms to Excel, automatically calculating completion and expiration dates, and generated personalized ID-style certification PDFs using Power Automate workflows reducing manual effort by 80% and ensuring 100% data accuracy in tracking.</li>
+          </ul>
         </div>
+
         <div class="card">
-          <h3>UC Connect Platform</h3>
-          <p>Full-stack student collaboration hub; aiming for 30 % project boost.</p>
+          <h3>UC Connect</h3>
+          <p class="mono muted">Feb 2025 – Present | Cincinnati, Ohio | University of Cincinnati</p>
+          <ul>
+            <li>Prototyping and developing a secure full-stack platform using Figma, HTML, CSS, and JavaScript to connect students across diverse majors at the University of Cincinnati, fostering collaboration, innovation, and interdisciplinary learning.</li>
+            <li>Designed to promote a startup culture, the platform aims to boost student-led project participation by 30% and connect 1 in 6 students for enhanced academic and professional networking.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Office Network Infrastructure Deployment & Configuration</h3>
+          <p class="mono muted">Jul 2024 – Aug 2024 | Kathmandu, Nepal</p>
+          <ul>
+            <li>Led the end-to-end setup and configuration of office network infrastructure from scratch, including the installation of routers, switches, and cabling, ensuring 99% uptime and high-speed connectivity, which supported 100+ employees and future scalability for organizational growth.</li>
+            <li>Collaborated closely with the IT team to diagnose and resolve complex network issues, performing advanced configurations and optimizations that resulted in a 20% improvement in network performance and enhanced system reliability, supporting seamless daily operations across the organization.</li>
+          </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 5. Skills -->
+  <!-- ----------  SKILLS & CERTIFICATIONS  ---------- -->
   <section id="skills" class="section alt">
     <div class="container">
-      <h2>Skills & Gear</h2>
-      <div class="skills-wrap">
+      <h2>Skills & Certifications</h2>
+
+      <h3 style="margin:2rem 0 1rem;">Certifications & Coursework</h3>
+      <ul class="muted">
+        <li>CompTIA CySA+: In Progress – Expected March 2026</li>
+        <li>Harvard CS50 Cybersecurity: Coursework Completed via Engineering Services Company (EDX)</li>
+        <li>Core Principles of Cybersecurity and Threat Intelligence: Certification accomplished: 10/9/2024 – LinkedIn Learning</li>
+        <li>Comprehensive Foundations of Code Architecture: Self-paced coursework completed via LinkedIn Learning</li>
+        <li>SQL & Enterprise Database Management Systems: Self-paced coursework completed via LinkedIn Learning</li>
+      </ul>
+
+      <h3 style="margin:2rem 0 1rem;">Technical Skills</h3>
+      <div class="skill-table">
         <div>
-          <h4>Security</h4>
+          <h4>Cybersecurity & Networking</h4>
           <ul>
-            <li>Incident Response</li>
+            <li>Wireshark</li>
+            <li>Nmap</li>
             <li>Threat Detection</li>
-            <li>Firewall Hardening</li>
+            <li>Incident Response</li>
+            <li>Firewall Configuration</li>
+            <li>Cloud Security</li>
             <li>Phishing Investigation</li>
+            <li>Basic Networking (TCP/IP, DNS, DHCP)</li>
           </ul>
         </div>
         <div>
-          <h4>Tools</h4>
+          <h4>Programming & Scripting</h4>
           <ul>
-            <li>Wireshark · Nmap</li>
-            <li>Active Directory</li>
-            <li>PowerShell · Python</li>
-            <li>VMware · Azure</li>
+            <li>HTML · CSS · JavaScript</li>
+            <li>Java · C++ · Python</li>
+            <li>SQL · Bash · PowerShell</li>
           </ul>
         </div>
         <div>
-          <h4>Certs</h4>
+          <h4>Tools & Platforms</h4>
           <ul>
-            <li>CompTIA CySA+ (in progress)</li>
-            <li>Harvard CS50 Cybersecurity</li>
-            <li>LinkedIn Threat Intel</li>
+            <li>Active Directory · Azure · VMware</li>
+            <li>Microsoft 365 Administration</li>
+            <li>GitHub · VS Code · PyCharm</li>
+            <li>Figma · Power BI · Excel</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Database & Backend</h4>
+          <ul>
+            <li>MySQL · Firebase · phpMyAdmin</li>
+            <li>Database Management</li>
           </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 6. Footer / Contact -->
+  <!-- ----------  FOOTER / CONTACT  ---------- -->
   <footer id="contact">
     <div class="container">
-      <h2>Connect</h2>
-      <div class="socials">
-        <a href="mailto:bipran.workspace@hotmail.com" aria-label="Email">
-          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-        </a>
-        <a href="https://linkedin.com/in/bipranrimal" target="_blank" aria-label="LinkedIn">
-          <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-        </a>
-        <a href="https://github.com/bipran" target="_blank" aria-label="GitHub">
-          <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-        </a>
-      </div>
-      <p class="copy">© <span id="year"></span> Bipran Rimal – crafted in code.</p>
+      <p class="muted">Reach out — always happy to talk security, automation, or distributed systems.</p>
+      <p class="copy">© <span id="yr"></span> Bipran Rimal – crafted in code.</p>
     </div>
   </footer>
 
-  <!-- tiny matrix rain for hero -->
+  <!-- ----------  MATRIX RAIN (subtle)  ---------- -->
   <script>
-    const c = document.getElementById('matrix');
-    const ctx = c.getContext('2d');
-    c.width = innerWidth; c.height = innerHeight;
-    const cols = Math.floor(c.width / 20);
-    const drops = Array(cols).fill(1);
-    const chars = '0123456789アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
-    function draw() {
-      ctx.fillStyle = 'rgba(10,10,10,.05)';
-      ctx.fillRect(0, 0, c.width, c.height);
-      ctx.fillStyle = '#00ff99';
-      ctx.font = '15px monospace';
-      drops.forEach((y, i) => {
-        const text = chars[Math.floor(Math.random() * chars.length)];
-        ctx.fillText(text, i * 20, y * 20);
-        if (y * 20 > c.height && Math.random() > 0.975) drops[i] = 0;
+    const c=document.getElementById('matrix');
+    const ctx=c.getContext('2d');
+    c.width=innerWidth;c.height=innerHeight;
+    const cols=Math.floor(c.width/20);
+    const drops=Array(cols).fill(1);
+    const chars='0123456789アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
+    function draw(){
+      ctx.fillStyle='rgba(13,13,13,.05)';
+      ctx.fillRect(0,0,c.width,c.height);
+      ctx.fillStyle='#00ff99';
+      ctx.font='15px monospace';
+      drops.forEach((y,i)=>{
+        ctx.fillText(chars[Math.floor(Math.random()*chars.length)],i*20,y*20);
+        if(y*20>c.height&&Math.random()>.975)drops[i]=0;
         drops[i]++;
       });
     }
-    setInterval(draw, 45);
-    addEventListener('resize', () => {
-      c.width = innerWidth; c.height = innerHeight;
-    });
-    document.getElementById('year').textContent = new Date().getFullYear();
+    setInterval(draw,50);
+    addEventListener('resize',()=>{c.width=innerWidth;c.height=innerHeight;});
+    document.getElementById('yr').textContent=new Date().getFullYear();
   </script>
 </body>
 </html>
